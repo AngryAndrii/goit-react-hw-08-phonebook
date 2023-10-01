@@ -7,15 +7,20 @@ const initialState = {
     email: null,
   },
   token: null,
-  isLogged: false,
+  isLoggedIn: false,
   isRefreshing: false,
 };
 
 const authSlise = createSlice({
   name: 'auth',
   initialState,
+  reducers: {},
   extraReducers: builder => {
-    builder.addCase(signup.fulfilled, (state, action) => {});
+    builder.addCase(signup.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    });
     //   .addCase(fetchContacts.fulfilled, (state, action) => {
     //     state.loading = false;
     //     state.contacts = action.payload;
@@ -37,3 +42,5 @@ const authSlise = createSlice({
     //   });
   },
 });
+
+export const authReducer = authSlise.reducer;

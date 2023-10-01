@@ -8,7 +8,7 @@ export const RegisterForm = () => {
     event.preventDefault();
     const newUser = {
       name: event.target.name.value,
-      mail: event.target.email.value,
+      email: event.target.email.value,
       password: event.target.password.value,
     };
     dispatch(signup(newUser));
