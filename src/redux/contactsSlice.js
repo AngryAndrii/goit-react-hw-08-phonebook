@@ -27,7 +27,6 @@ const contactsSlice = createSlice({
         state.contacts = action.payload;
         state.error = null;
       })
-      .addCase(fetchContacts.rejected, handleRejected)
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
@@ -35,7 +34,6 @@ const contactsSlice = createSlice({
           item => item.id !== action.payload.id
         );
       })
-      .addCase(deleteContact.rejected, handleRejected)
       .addCase(addContact.fulfilled, (state, action) => {
         return {
           ...state,
@@ -43,13 +41,20 @@ const contactsSlice = createSlice({
           contacts: [action.payload, ...state.contacts],
         };
       })
-      .addCase(addContact.rejected, handleRejected)
       .addMatcher(
-        isAnyOf(fetchContacts, deleteContact, addContact),
+        isAnyOf(
+          fetchContacts.pending,
+          deleteContact.pending,
+          addContact.pending
+        ),
         handlePending
       )
       .addMatcher(
-        isAnyOf(fetchContacts, deleteContact, addContact),
+        isAnyOf(
+          fetchContacts.rejected,
+          deleteContact.rejected,
+          addContact.rejected
+        ),
         handleRejected
       );
   },
