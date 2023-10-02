@@ -23,3 +23,21 @@ export const signup = createAsyncThunk(
     }
   }
 );
+
+export const login = createAsyncThunk('auth/login', async (body, thunkAPI) => {
+  try {
+    const resp = await axios.post('/users/login', body);
+    setAuthHeader(resp.data.token);
+    return resp.data;
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});
+
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await axios.post('/users/logout');
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.message);
+  }
+});

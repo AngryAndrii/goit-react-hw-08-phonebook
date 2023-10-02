@@ -16,11 +16,17 @@ const authSlise = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(signup.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-    });
+    builder
+      .addCase(signup.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      });
     //   .addCase(fetchContacts.fulfilled, (state, action) => {
     //     state.loading = false;
     //     state.contacts = action.payload;
