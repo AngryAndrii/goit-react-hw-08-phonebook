@@ -1,3 +1,3 @@
-export default Navigation = () => {
+export default function Navigation() {
   return <>Navigation</>;
-};
+}
