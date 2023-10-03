@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { signup } from './operations';
+import { login, signup } from './operations';
 
 const initialState = {
   user: {
@@ -14,7 +14,7 @@ const initialState = {
 const authSlise = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  // reducers: {},
   extraReducers: builder => {
     builder
       .addCase(signup.fulfilled, (state, action) => {
