@@ -8,19 +8,22 @@ import Contacts from 'pages/contacts';
 import Notfound from 'pages/notfound';
 import AppBar from './AppBar/AppBar';
 import LayOut from './LayOut/LayOut';
+import { useAuth } from 'hooks';
+import { useDispatch } from 'react-redux';
+import { refreshUser } from 'redux/Auth/operations';
+import { useEffect } from 'react';
 
 export const App = () => {
-  return (
-    // <>
-    //   <Section title="Phonebook">
-    //     <PhoneBook />
-    //   </Section>
-    //   <Section title="Contacts">
-    //     <Filter />
-    //     {!error && <Contacts />}
-    //     {isLoading && !error && <Loader />}
-    //   </Section>
-    // </>
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <>
       <AppBar />
       <Routes>
