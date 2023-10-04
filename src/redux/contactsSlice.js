@@ -10,15 +10,17 @@ const initialState = {
 
 const handlePending = state => {
   state.loading = true;
+  state.error = null;
 };
 
-const handleRejected = state => {
+const handleRejected = (state, action) => {
   state.loading = false;
+  state.error = action.payload;
 };
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: builder => {
     builder
