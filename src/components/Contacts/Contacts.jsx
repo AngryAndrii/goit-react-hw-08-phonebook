@@ -1,4 +1,3 @@
-// import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { StyledList } from './Contacts.styled';
 import { deleteContact, fetchContacts } from 'service/getContacts';
@@ -16,9 +15,9 @@ const Contacts = () => {
   return (
     <StyledList>
       <p>coooontacts</p>
-      {contacts?.map(({ id, name, phone }) => (
+      {contacts?.map(({ id, name, number }) => (
         <li key={id}>
-          <span>{name}</span> : {phone}
+          <span>{name}</span> : {number}
           <button onClick={() => dispatch(deleteContact(id))}>Delete</button>
         </li>
       ))}
