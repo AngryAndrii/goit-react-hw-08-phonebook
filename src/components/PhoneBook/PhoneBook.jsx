@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'service/getContacts';
 import { selectContacts } from 'redux/selectors';
 
-export const PhoneBook = () => {
+const PhoneBook = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
@@ -61,3 +61,5 @@ export const PhoneBook = () => {
     </>
   );
 };
+
+export default PhoneBook;
