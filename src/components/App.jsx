@@ -1,6 +1,4 @@
 import { Route, Routes } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { selectError, selectLoading } from 'redux/selectors';
 import Home from 'pages/home';
 import Register from 'pages/register';
 import Login from 'pages/login';
@@ -12,6 +10,8 @@ import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/Auth/operations';
 import { useEffect } from 'react';
+import { RestrictedRoute } from './RestrictedRoute';
+import { PrivateRoute } from './PrivateRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -29,9 +29,24 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<LayOut />} />
         <Route index element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/contacts" element={<ContactsPage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute component={<Register />} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute component={<Login />} redirectTo="/contacts" />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
+          }
+        />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </>
