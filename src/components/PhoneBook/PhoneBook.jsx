@@ -25,7 +25,7 @@ const PhoneBook = () => {
     }
     const contact = {
       name: name,
-      phone: number,
+      number: number,
     };
     dispatch(addContact(contact));
     form.reset();
