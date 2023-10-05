@@ -4,9 +4,8 @@ import { StyledList } from './Contacts.styled';
 import { deleteContact, fetchContacts } from 'service/getContacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectVisibleContacts } from 'redux/selectors';
-// import { deleteContact } from 'redux/contactsSlice';
 
-export const Contacts = () => {
+const Contacts = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectVisibleContacts);
 
@@ -16,6 +15,7 @@ export const Contacts = () => {
 
   return (
     <StyledList>
+      <p>coooontacts</p>
       {contacts?.map(({ id, name, phone }) => (
         <li key={id}>
           <span>{name}</span> : {phone}
@@ -25,3 +25,5 @@ export const Contacts = () => {
     </StyledList>
   );
 };
+
+export default Contacts;
