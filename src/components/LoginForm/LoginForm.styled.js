@@ -6,6 +6,10 @@ export const StyledForm = styled.form`
   justify-content: center;
   margin: 0 auto;
   width: 500px;
+  row-gap: 20px;
+  input {
+    margin-left: 15px;
+  }
   button {
     width: 300px;
   }
