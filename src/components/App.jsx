@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from 'pages/home';
-import Register from 'pages/register';
-import Login from 'pages/login';
-import ContactsPage from 'pages/contactsPage/contactsPage';
 import Notfound from 'pages/notfound';
-import AppBar from './AppBar/AppBar';
 import LayOut from './LayOut/LayOut';
 import { useAuth } from 'hooks';
 import { useDispatch } from 'react-redux';
 import { refreshUser } from 'redux/Auth/operations';
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
+
+const Home = lazy(() => import('../pages/home'));
+const Register = lazy(() => import('../pages/register'));
+const Login = lazy(() => import('../pages/login'));
+const ContactsPage = lazy(() => import('../pages/contactsPage/contactsPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -25,29 +25,32 @@ export const App = () => {
     <h4>Refreshing user...</h4>
   ) : (
     <>
-      <AppBar />
       <Routes>
-        <Route path="/" element={<LayOut />} />
-        <Route index element={<Home />} />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute component={<Register />} redirectTo="/contacts" />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute component={<Login />} redirectTo="/contacts" />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
-          }
-        />
-        <Route path="*" element={<Notfound />} />
+        <Route path="/" element={<LayOut />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                component={<Register />}
+                redirectTo="/contacts"
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute component={<Login />} redirectTo="/contacts" />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute component={<ContactsPage />} redirectTo="/login" />
+            }
+          />
+          <Route path="*" element={<Notfound />} />
+        </Route>
       </Routes>
     </>
   );
